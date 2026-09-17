@@ -1,0 +1,6 @@
+Using CPython 3.12.11
+Creating virtual environment at: .venv
+Resolved 3 packages in 3ms
+Installed 2 packages in 11ms
+ + networkx==3.6.1
+ + z3-solver==5.1.0.0

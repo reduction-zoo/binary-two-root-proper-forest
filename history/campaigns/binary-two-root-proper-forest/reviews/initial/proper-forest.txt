@@ -1,0 +1,556 @@
+Delft University of Technology
+
+
+
+
+Document Version
+Final published version
+
+Licence
+CC BY
+
+Citation (APA)
+Huber, K. T., van Iersel, L., Moulton, V., & Scholz, G. E. (2025). Is this network proper forest-based? Information
+Processing Letters, 187, Article 106500. https://doi.org/10.1016/j.ipl.2024.106500
+
+
+
+
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+
+Copyright
+In case the licence states “Dutch Copyright Act (Article 25fa)”, this publication was made available Green Open
+Access via the TU Delft Institutional Repository pursuant to Dutch Copyright Act (Article 25fa, the Taverne
+amendment). This provision does not affect copyright ownership.
+Unless copyright is transferred by contract or statute, it remains with the copyright holder.
+Sharing and reuse
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without
+the consent of the author(s) and/or copyright holder(s), unless the work is under an open content license such as
+Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+
+
+
+This work is downloaded from Delft University of Technology.
+                                                                            Inf. Process. Lett. 187 (2025) 106500
+
+
+                                                                         Contents lists available at ScienceDirect
+
+
+                                                                Information Processing Letters
+                                                                 journal homepage: www.elsevier.com/locate/ipl
+
+
+
+
+Is this network proper forest-based?
+Katharina T. Huber b , Leo van Iersel a,∗,1 , Vincent Moulton b , Guillaume E. Scholz c
+a
+    Delft Institute of Applied Mathematics, Delft University of Technology, Mekelweg 4, Delft, 2628 CD, the Netherlands
+b
+    School of Computing Sciences, University of East Anglia, NR4 7TJ, Norwich, United Kingdom
+c
+    Bioinformatics Group, Department of Computer Science and Interdisciplinary Center for Bioinformatics, Universität Leipzig, Leipzig, Germany
+
+
+
+
+A R T I C L E                I N F O                           A B S T R A C T
+
+Keywords:                                                      In evolutionary biology, networks are becoming increasingly used to represent evolutionary histories for species
+Algorithms                                                     that have undergone non-treelike or reticulate evolution. Such networks are essentially directed acyclic graphs
+Forest-based network                                           with a leaf set that corresponds to a collection of species, and in which non-leaf vertices with indegree 1
+Phylogenetic network
+                                                               correspond to speciation events and vertices with indegree greater than 1 correspond to reticulate events such
+Phylogenetic forest
+                                                               as gene transfer. Recently forest-based networks have been introduced, which are essentially (multi-rooted)
+Graph coloring
+                                                               networks that can be formed by adding some arcs to a collection of phylogenetic trees (or phylogenetic forest),
+                                                               where each arc is added in such a way that its ends always lie in two diﬀerent trees in the forest. In this paper,
+                                                               we consider the complexity of deciding whether a given network is proper forest-based, that is, whether it can
+                                                               be formed by adding arcs to some underlying phylogenetic forest which contains the same number of trees as
+                                                               there are roots in the network. More speciﬁcally, we show that it is NP-complete to decide whether a tree-child
+                                                               network with 𝑚 roots is proper forest-based, for each 𝑚 ≥ 2. Moreover, for binary networks the problem remains
+                                                               NP-complete when 𝑚 ≥ 3 but becomes polynomial-time solvable for 𝑚 = 2. We also give a ﬁxed parameter
+                                                               tractable (FPT) algorithm, with parameters the maximum outdegree of a vertex, the number of roots, and the
+                                                               number of indegree 2 vertices, for deciding if a semi-binary network is proper forest-based. A key element in
+                                                               proving our results is a new characterization for when a network with 𝑚 roots is proper forest-based in terms of
+                                                               certain 𝑚-colorings.
+
+
+
+
+1. Introduction                                                                                      reviews of phylogenetic networks, including more details concerning
+                                                                                                     tree-based networks).
+    Recently, the concept of forest-based networks has been introduced                                   Forest-based networks arise in the study of reticulate evolutionary
+within the area of phylogenetics [8]. Informally, a forest-based network                             processes in which species exchange genetic information through pro-
+is deﬁned as follows (full deﬁnitions of the terms used in the introduc-                             cesses such as introgression [13] and lateral gene transfer [8]. In the
+tion are given in the next section). A phylogenetic tree is a rooted tree                            case of introgression, the phylogenetic trees underlying a forest-based
+whose leaf-set is a collection of taxa or species; a phylogenetic forest is                          network correspond to the evolutionary histories of diﬀerent subgroups
+a collection of leaf-disjoint phylogenetic trees. A forest-based network is                          or lineages within a certain species. The arcs in between diﬀerent trees
+a directed acyclic graph 𝑁 that can be formed by adding a set of arcs                                then represent the past interchange of genetic material between these
+to a phylogenetic forest 𝐹 so that for each added arc, the end vertices                              lineages. A well-studied example of this phenomenon is butterﬂy evo-
+of that arc lie in two diﬀerent trees of 𝐹 ; 𝑁 is proper if the number                               lution, where the genetic material that is swapped between lineages
+of roots of 𝑁 is equal to the number of trees in 𝐹 . For example, the                                inﬂuences wing patterns [1,16]. Fig. 1 shows a hypothetical exam-
+network in Fig. 1 is proper forest-based. Forest-based networks can be                               ple to illustrate this phenomenom. An application of a special type of
+regarded as a certain type of phylogenetic network, and are related to the                           forest-based network called an overlaid species forest for analyzing intro-
+intensively studied tree-based networks [6] (see e.g. [11,14] for recent                             gression in butterﬂies can be found in [13].
+
+
+ * Corresponding author.
+    E-mail addresses: K.Huber@uea.ac.uk (K.T. Huber), L.J.J.vanIersel@tudelft.nl (L. van Iersel), V.Moulton@uea.ac.uk (V. Moulton),
+guillaume@bioinf.uni-leipzig.de (G.E. Scholz).
+ 1
+    Research funded in part by the Netherlands Organisation for Scientiﬁc Research (NWO) grants OCENW.KLEIN.125 and OCENW.M.21.306.
+
+https://doi.org/10.1016/j.ipl.2024.106500
+Received 11 July 2023; Received in revised form 23 April 2024; Accepted 29 April 2024
+Available online 6 May 2024
+0020-0190/© 2024 The Author(s). Published by Elsevier B.V. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                                 Information Processing Letters 187 (2025) 106500
+
+
+                                                                                        2. Deﬁnitions
+
+                                                                                             From now on, 𝑋 is a ﬁnite set with |𝑋| ≥ 2. Suppose that 𝑁 is a
+                                                                                        connected, directed acyclic graph (DAG) and 𝑣 ∈ 𝑉 (𝑁). Then 𝑣 is a leaf
+                                                                                        if it has outdegree 0, a root if it has indegree 0, and a reticulation if it
+                                                                                        has indegree at least 2. If 𝑣 is not a leaf, then 𝑣 is an internal vertex of
+                                                                                        𝑁 . In particular, roots are internal vertices. We call an arc 𝑎 = (𝑢, 𝑣) of
+                                                                                        𝑁 internal if 𝑢 and 𝑣 are both internal vertices of 𝑁 . If 𝑣 is an internal
+Fig. 1. A proper forest-based network 𝑁 on ten leaves. Each of the three phylo-
+                                                                                        vertex that has indegree at most 1, then 𝑣 is a tree-vertex.
+genetic trees in the underlying forest represents a hypothetical butterﬂy lineage
+                                                                                             For vertices 𝑢, 𝑣 ∈ 𝑉 (𝑁), we say that 𝑢 is an ancestor of 𝑣 if there
+with main wing pattern indicated next to the root of the tree. The network 𝑁
+is the result of adding dashed arcs in between pairs of trees in the forest. Each       exists a directed path from 𝑢 to 𝑣 in 𝑁 . In this case, we say that 𝑣 is a
+added arc corresponds to some genetic material being introduced into a lin-             descendant of 𝑢. Note that each vertex is an ancestor and a descendant
+eage from one of the others, which results in a wing pattern change for the             of itself.
+descendants.                                                                                 We call 𝑁 a network (on 𝑋 ) if it has leaf-set 𝑋 (which we also
+                                                                                        denote by 𝐿(𝑁)), each leaf has indegree 1, every root has outdegree
+                                                                                        at least 2, every reticulation has outdegree 1, and there is no vertex
+    In this paper we consider the problem:
+                                                                                        with indegree and outdegree 1. If 𝑁 has 𝑚 roots, we also call it an 𝑚-
+                                                                                        network.2 For example, the network depicted in Fig. 1 is a 3-network.
+(P) Is a given network 𝑁 proper forest-based?
+                                                                                        We say that two 𝑚-networks 𝑁 and 𝑁 ′ on 𝑋 are isomorphic if there is
+                                                                                        a DAG isomorphism between 𝑁 and 𝑁 ′ which is the identity on 𝑋 .
+    Our main results are as follows. A network is binary if all vertices
+                                                                                             A network is semi-binary if all reticulations have indegree 2. It is
+have indegree and outdegree at most 2 and all non-root vertices have
+                                                                                        quasi-binary if all tree-vertices have outdegree 2 and all reticulations
+overall degree 1 or 3. A network is tree-child if each non-leaf vertex has
+                                                                                        have indegree 2 or 3. Note that a network is binary if it is quasi-binary
+at least one child with indegree 1. For networks with 𝑣 vertices, 𝑚 roots,
+                                                                                        and semi-binary. A network is tree-child if every internal vertex has a
+𝑛 leaves, 𝑟 vertices with indegree at least 2, and maximum outdegree Δ,
+                                                                                        child that is a tree-vertex or a leaf.
+we shall prove that problem (P):
+                                                                                             A phylogenetic network (on 𝑋 ) is a network on 𝑋 with exactly one
+(R1) can be decided in 𝑂(𝑛𝑟) time when 𝑁 is restricted to be binary                     root and a phylogenetic tree (on 𝑋 ) is a phylogenetic network on 𝑋 with
+     and tree-child and 𝑚 = 2 (Theorem 6.2);                                            no reticulations. For technical reasons, we shall also call an isolated
+(R2) is NP-complete even when 𝑁 is restricted to be binary and tree-                    vertex 𝑣 a phylogenetic tree (on {𝑣}). Two distinct leaves 𝑥, 𝑦 of a phy-
+     child, for each ﬁxed 𝑚 ≥ 3 (Theorem 6.1);                                          logenetic tree form a cherry if they share a parent. We denote such a
+(R3) is NP-complete even when 𝑁 is restricted to be tree-child, with                    cherry by {𝑥, 𝑦}. A phylogenetic tree 𝑇 on 𝑋 a caterpillar tree (on 𝑋 ) if
+     maximum outdegree 2 and maximum indegree at most 3, for each                       𝑇 has a unique cherry and every internal arc of 𝑇 lies on the directed
+     ﬁxed 𝑚 ≥ 2 (Theorems 4.1 and 6.1);                                                 path from the root of 𝑇 to the parent of the cherry.
+(R4) can be decided using an FPT algorithm with parameters 𝑟, 𝑚                              A phylogenetic forest (on 𝑋 ) is a directed graph 𝐹 whose connected
+                                                                                                                                                    ⋃
+     and Δ, which is linear in 𝑣, assuming the maximum indegree is 2                    components are phylogenetic trees and such that 𝑋 = 𝑇 ∈𝐹 𝐿(𝑇 ). For
+     (Theorem 7.2).                                                                     convenience, we will sometimes also call a non-empty set of pairwise
+                                                                                        leaf-set disjoint phylogenetic trees a phylogenetic forest.
+     Before proceeding, it is worth pointing out that recognition prob-                      Suppose 𝑁 = (𝑉 , 𝐴) is an 𝑚-network on 𝑋 , some 𝑚 ≥ 2. Then 𝑁
+lems such as (P) frequently arise in the theory of phylogenetic networks.               is forest-based if there exists a subset 𝐴′ ⊆ 𝐴 such that 𝐹 ′ = (𝑉 , 𝐴′ ) is
+For example, the recognition of tree-based networks has been inten-                     a forest with leaf set 𝑋 and each arc in 𝐴 − 𝐴′ has end vertices that
+sively studied and there are polynomial-time algorithms for deciding                    are in diﬀerent trees of 𝐹 ′ . We call 𝐹 ′ a subdivision forest of 𝑁 . The
+whether a phylogenetic network is tree-based (see e.g. [6,10]). Results                 phylogenetic forest 𝐹 obtained from 𝐹 ′ by repeatedly suppressing any
+are also known for tree-based unrooted phylogenetic networks (undi-                     vertices of indegree and outdegree 1 and any outdegree 1 roots until this
+rected analogues of phylogenetic networks) where, in contrast to the                    is no longer possible is a base forest of 𝑁 . Note that, in particular, we
+directed case, it is NP-complete to decide whether such a network is                    can think of 𝐹 as being embedded within 𝑁 . A forest-based 𝑚-network
+tree-based [4]. More recently, there has also been some interest in the                 is proper forest-based if it has a base forest that contains 𝑚 trees – see
+recognition problem for other classes of networks, such as planar [12],                 [8,9] for more on this.
+orchard [15], and labellable phylogenetic networks [5], as well as the                       To illustrate, consider the network 𝑁 depicted in Fig. 1. Clearly, 𝑁
+related problem of deciding how far away a given phylogenetic network                   is forest-based since the forest 𝐹 ′ obtained from 𝑁 by removing the
+is from being within a certain class [3]. Generally speaking, developing                dashed arcs is a forest with 𝐿(𝐹 ′ ) = 𝐿(𝑁), and each dashed arc has end
+techniques for recognizing whether a network belongs to a speciﬁc class                 vertices in distinct trees of 𝐹 ′ . Hence, 𝐹 ′ is a subdivision forest of 𝑁 .
+can be useful as it provides insights into the structure of the networks                A base forest 𝐹 of 𝑁 is obtained from 𝐹 ′ by suppressing the vertices 𝑢,
+within that class.                                                                      𝑣, 𝑤, ℎ1 , ℎ2 and ℎ3 , as all have indegree and outdegree 1 in 𝐹 ′ . Since
+     We now brieﬂy summarise the rest of the paper. In the next sec-                    𝐹 contains 3 trees and 𝑁 is a 3-network, 𝑁 is proper forest-based.
+tion, we present some formal deﬁnitions concerning networks. In Sec-
+tion 3, we derive a key characterization of proper forest-based networks                3. Colorings and proper forest-based networks
+(Lemma 3.1). In Section 4, we establish Statement (R3) by reducing
+from the S ET -S PLITTING problem. Using colorings, in Section 5 we                         Suppose 𝐺 is a (simple) graph and 𝐶 ≠ ∅ is a ﬁnite set of colors.
+present an alternative proof for Statement (R3) in the special case that                A surjective map 𝜎 ∶ 𝑉 (𝐺) → 𝐶 is a |𝐶|-coloring of 𝐺 . For 𝑣 ∈ 𝑉 (𝐺), the
+𝑚 ≥ 3 by reducing from the G RAPH 𝑚 - COLORABILTY problem. The con-                     color of 𝑣 under 𝜎 , or simply the color of 𝑣 if 𝜎 is clear from the context,
+struction that we use in this proof is then used again in Section 6 to                  is 𝜎(𝑣). A coloring 𝜎 of 𝐺 is proper if 𝜎(𝑥) ≠ 𝜎(𝑦), for any two adjacent
+prove that Statement (R2) holds. Using the concept of so-called omni-                   vertices 𝑥, 𝑦 ∈ 𝑉 (𝐺).
+extensions [8] we also prove Statement (R1). Finally, in Section 7, we
+prove Statement (R4), before concluding in Section 8 with a brief dis-
+                                                                                         2
+cussion of potential directions for future research.                                         Note that this is more general than the deﬁnition given in [8].
+
+                                                                                    2
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                             Information Processing Letters 187 (2025) 106500
+
+
+   We now characterize proper forest-based networks in terms of col-                 added during this step Gen2 vertices. Finally, for all 𝑆 ∈  and all 𝑥 ∈ 𝑆 ,
+orings of their vertex sets.                                                         we create a reticulation ℎ𝑆 with parents the vertices on 𝑃𝑥 labeled by
+                                                                                     𝑆 and add a leaf 𝓁𝑆 to ℎ𝑆 by adding the arc (ℎ𝑆 , 𝓁𝑆 ). We call vertices
+Lemma 3.1. Let 𝑁 be an 𝑚-network on 𝑋 , 𝑚 ≥ 2. Then 𝑁 is proper forest-              added during this step Gen3 vertices.
+based if and only if there exists an 𝑚-coloring of 𝑁 such that:                           Let 𝑁 denote the resulting DAG. By construction, 𝑁 is an 𝑚-network
+                                                                                     on 𝐿(𝑁) that is quasi-binary and tree-child. We now show that there
+(C1) Each non-root vertex of 𝑁 has the same color as exactly one of its              exists a solution to the S ET -S PLITTING problem for 𝑋 and  if and only
+     parents.                                                                        if 𝑁 is proper forest-based, which will complete the proof.
+(C2) Each internal vertex of 𝑁 has the same color as at least one of its                  Suppose ﬁrst that {𝐴, 𝐵} is a solution to the S ET -S PLITTING problem
+     children.                                                                       for 𝑋 and  . We deﬁne an 𝑚-coloring 𝜎 ∶ 𝑉 (𝑁) → {1, … , 𝑚} for 𝑁
+                                                                                     as follows. Let 𝑣 ∈ 𝑉 (𝑁). If 𝑣 is a Gen1 tree-vertex, we set 𝜎(𝑣) = 1
+Proof. Suppose ﬁrst that 𝑁 is proper forest-based. Let 𝐹 ′ be a corre-               if 𝑣 ∈ 𝑉 (𝑇1 ), and 𝜎(𝑣) = 2 if 𝑣 ∈ 𝑉 (𝑇2 ), if 𝑣 ∈ {𝑟2 , 𝓁2 , ℎ2 }, and if 𝑣 ∈
+sponding subdivision forest of 𝑁 . We claim that the map 𝜎 ∶ 𝑉 (𝑁) →                 {𝑟𝑚 , 𝓁𝑚 } we put 𝜎(𝑣) = 𝑚. If 𝑣 ∈ 𝑉 (𝑃𝑥 ) ∪ {𝑥} for some 𝑥 ∈ 𝑋 , then we
+𝐹 ′ that assigns to each 𝑣 ∈ 𝑉 (𝑁) the tree in 𝐹 ′ that contains 𝑣 in its            put 𝜎(𝑣) = 1 if 𝑥 ∈ 𝐴 and 𝜎(𝑥) = 2 if 𝑥 ∈ 𝐵 . Finally, if 𝑣 ∈ {ℎ𝑆 , 𝓁𝑆 }
+vertex set is an 𝑚-coloring of 𝑁 that satisﬁes (C1) and (C2).                        for some 𝑆 ∈  , then we put 𝜎(𝑣) = 1 if |𝑆 ∩ 𝐴| = 1 and 𝜎(𝑣) = 2 if
+    To see (C1), let 𝑣 be a non-root vertex of 𝑁 . Since the root of each            |𝑆 ∩ 𝐵| = 1. Note that since {𝐴, 𝐵} is a solution to the S ET -S PLITTING
+tree of 𝐹 ′ is a root of 𝑁 , 𝑣 is not the root of 𝜎(𝑣). So at least one of the       problem, precisely one of these equalities always holds. We claim that
+parents of 𝑣 has the same color as 𝑣. If 𝑣 has two or more parents satisfy-          𝜎 satisﬁes (C1) and (C2), which implies that 𝑁 is proper forest-based.
+ing this property, then 𝑣 has indegree 2 or more in 𝜎(𝑣), a contradiction                 To see that (C1) holds, note ﬁrst that, by construction, all non-root
+as 𝜎(𝑣) is a tree. Hence, (C1) holds.                                                vertices 𝑣 have at least one parent 𝑢 satisfying 𝜎(𝑢) = 𝜎(𝑣). Suppose
+    To see (C2), let 𝑣 be an internal vertex of 𝑁 . Since 𝐿(𝑁) = 𝐿(𝐹 ′ ), 𝑣          now that 𝑣 is a reticulation. If 𝑣 is a Gen1 vertex, then 𝜎(𝑣) ∈ {1, 2}
+is not a leaf of 𝜎(𝑣). Hence, there exists at least one child 𝑢 of 𝑣 in 𝑁            and 𝑣 has exactly two parents. Calling them 𝑣1 and 𝑣2 we have
+such that 𝜎(𝑢) = 𝜎(𝑣).                                                               𝜎(𝑣1 ), 𝜎(𝑣2 ) ∈ {1, 2} and 𝜎(𝑣1 ) ≠ 𝜎(𝑣2 ). Thus, exactly one of 𝜎(𝑣1 ) = 𝜎(𝑣)
+    Conversely, suppose that there exists an 𝑚-coloring 𝜎 of 𝑁 = (𝑉 , 𝐴)             or 𝜎(𝑣2 ) = 𝜎(𝑣) holds. If 𝑣 is a Gen3 vertex, then 𝑣 has three parents
+satisfying (C1) and (C2). Let 𝐹 ′ be the graph with vertex set 𝑉 and                 𝑣1 , 𝑣2 , 𝑣3 and two of them must have the same color under 𝜎 . Without
+arc set 𝐴′ = {(𝑢, 𝑣) ∈ 𝐴 ∶ 𝜎(𝑢) = 𝜎(𝑣)}. By (C1), no vertex in 𝐹 ′ has               loss of generality assume that 𝜎(𝑣2 ) = 𝜎(𝑣3 ). By deﬁnition, 𝜎(𝑣) = 𝜎(𝑣1 )
+indegree greater than 1, and by (C2), 𝐿(𝑁) = 𝐿(𝐹 ′ ). So 𝐹 ′ is a sub-               follows. Hence, (C1) holds.
+division forest of 𝑁 . Since the end vertices of each arc in 𝐴 − 𝐴′ have                  To see that (C2) holds, let 𝑣 ∈ 𝑉 (𝑁) − 𝐿(𝑁). If 𝑣 is a Gen1 vertex
+diﬀerent colors, they appear in diﬀerent trees of 𝐹 ′ . Hence, 𝑁 is proper           that is not a reticulation, then 𝑣 is an internal vertex of either 𝑇1 or 𝑇2 .
+forest-based. □                                                                      Since, for all 𝑖 ∈ {1, 2}, 𝑇𝑖 is a caterpillar tree and, by deﬁnition of 𝜎 ,
+                                                                                     all vertices on the directed path from the root of 𝑇𝑖 to 𝓁 have the same
+   Note that if 𝜎 is an 𝑚-coloring of an 𝑚-network 𝑁 satisfying (C1) and             color under 𝜎 , (C2) follows. If 𝑣 is a Gen2 vertex or a Gen1 reticulation
+(C2), then these two properties together with the fact that the image of             then 𝑣 ∈ {𝑥} ∪ 𝑉 (𝑃𝑥 ), some 𝑥 ∈ 𝑋 . Since 𝑃𝑥 is a directed path whose
+𝜎 has size 𝑚 imply that no two roots of 𝑁 have the same color under 𝜎 .              ﬁrst vertex is adjacent with 𝑥, the deﬁnition of 𝜎 implies (C2) again.
+                                                                                     Finally, if 𝑣 is a Gen3 vertex, then 𝑣 = ℎ𝑆 , some 𝑆 ∈  . By deﬁnition,
+4. Tree-child networks                                                               𝜎(ℎ𝑆 ) = 𝜎(𝓁𝑆 ). Hence, (C2) also holds.
+                                                                                          Conversely, suppose that 𝑁 is proper forest-based. By Lemma 3.1,
+    The main result in this section implies Statement (R3) for the                   there exists an 𝑚-coloring 𝜎 of 𝑁 satisfying (C1) and (C2). Note that,
+case 𝑚 = 2. To prove it, we shall reduce from the NP-complete S ET -                 by construction, the set of all Gen1 reticulations of 𝑁 is 𝑋 and also that
+S PLITTING decision problem [7, page 221] which is deﬁned as follows.                every element in 𝑋 is a descendant of both 𝑟2 and the root 𝜌1 of 𝑇1 . By
+                                                                                     (C1), it follows that either 𝜎(𝑥) = 𝜎(𝑟2 ) or 𝜎(𝑥) = 𝜎(𝜌1 ) holds for all 𝑥 ∈
+   ∙ Given some ﬁnite set 𝑋 , |𝑋| ≥ 3, and a set  of size-3 subsets of 𝑌 ,          𝑋 . Let 𝐴 = {𝑥 ∈ 𝑋 ∶ 𝜎(𝑥) = 𝜎(𝜌1 )} and 𝐵 = {𝑥 ∈ 𝑋 ∶ 𝜎(𝑥) = 𝜎(𝑟2 )}.
+     is there a bipartition {𝐴, 𝐵} of 𝑋 such that, for all 𝑆 ∈  , 𝑆 ∩ 𝐴 ≠ ∅         Clearly, {𝐴, 𝐵} is a bipartition of 𝑋 as 𝜎(𝑟2 ) ≠ 𝜎(𝜌1 ).
+     and 𝑆 ∩ 𝐵 ≠ ∅?                                                                       We claim that {𝐴, 𝐵} is a solution to the S ET -S PLITTING problem. To
+                                                                                     see this, consider a set 𝑆 = {𝑥, 𝑦, 𝑧} ∈  . By construction, ℎ𝑆 has three
+Theorem 4.1. For 𝑚 = 2, the problem of deciding whether a quasi-binary               ancestors, all of which are Gen2 vertices that are a descendant of 𝑥,
+tree-child 𝑚-network is proper forest-based is NP-complete.                          𝑦 and 𝑧, respectively. Since a Gen2 vertex is a vertex on 𝑃𝑤 for some
+                                                                                     𝑤 ∈ 𝑋 , (C1) implies that 𝜎(𝑤) = 𝜎(𝑢), for all 𝑢 ∈ 𝑉 (𝑃𝑤 ). Moreover, by
+Proof. The problem is in the NP since, for each proper forest-based,                 (C2), exactly one parent 𝑢 of ℎ𝑆 satisﬁes 𝜎(𝑢) = 𝜎(ℎ𝑆 ). Without loss of
+quasi-binary, tree-child 𝑚-network, an 𝑚-coloring satisfying (C1) and                generality, we may assume that 𝑢 is a descendant of 𝑥. Hence, 𝜎(𝑥) ≠
+(C2) serves as a certiﬁcate and (C1) and (C2) can be veriﬁed in polyno-              𝜎(𝑦) = 𝜎(𝑧). By deﬁnition of 𝐴 and 𝐵 , it follows that 𝑆 ∩ 𝐴 ≠ ∅ and
+mial time.                                                                           𝑆 ∩ 𝐵 ≠ ∅. Since this holds for all 𝑆 ∈  , the claim follows. □
+    We shall prove NP-completeness by giving a reduction from S ET -
+S PLITTING. Suppose that we are given a collection  of size-3 subsets of
+                                                                                     5. Tree-child networks revisited
+𝑋 . We create a 2-network as follows (see Fig. 2 where we illustrate the
+various constructions that we perform as part of this proof in terms of
+an example). Let 𝑋 ′ = 𝑋 ∪ {𝓁} for some element 𝓁 ∉ 𝑋 , and let 𝑇1 and                  In this section, we prove a result using network colorings from which
+𝑇2 denote two isomorphic caterpillars trees on 𝑋 ′ such that 𝓁 is a leaf             a weaker form of Statement (R3) also follows. We do this in part be-
+in the unique cherry of 𝑇1 (and therefore also of 𝑇2 ). For all 𝑥 ∈ 𝑋 , we           cause the construction that we shall use in the proof will be used in the
+identify leaf 𝑥 of 𝑇1 with leaf 𝑥 of 𝑇2 . The resulting network has |𝑋|              next section for establishing our results concerning binary, tree-child
+reticulations. We call all vertices in the resulting DAG Gen1 vertices.              𝑚-networks. We shall reduce from the G RAPH 𝑚 - COLORABILTY decision
+    For all 𝑥 ∈ 𝑋 , we attach to 𝑥 a path 𝑃𝑥 of length 𝑐(𝑥) + 1 via an arc           problem for 𝑚 ≥ 3 ([7, page 190]) which is as follows.
+(𝑥, 𝑎𝑥 ), where 𝑎𝑥 is the ﬁrst vertex on 𝑃𝑥 and 𝑐(𝑥) is the number of sets
+in  containing 𝑥. We then bijectively label for each 𝑥 ∈ 𝑋 the internal               ∙ Given a (simple) graph 𝐺 , does there exist a proper 𝑚-coloring
+vertices of 𝑃𝑥 with the elements in  that contain 𝑥. We call all vertices               of 𝐺 ?
+
+                                                                                 3
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                                 Information Processing Letters 187 (2025) 106500
+
+
+
+
+                                                                                     Fig. 3. The 3-network 𝑁 constructed from the graph 𝐺 with vertex set 𝑋 =
+                                                                                     {𝑎, 𝑏, 𝑐, 𝑑, 𝑒} and edge set 𝐸(𝐺) = {{𝑎, 𝑏}, {𝑎, 𝑐}, {𝑏, 𝑐}, {𝑏, 𝑑}, {𝑐, 𝑑}, {𝑑, 𝑒}}, as
+                                                                                     described in the proof of Proposition 5.1. Gen1, Gen2 and Gen3 vertices are
+                                                                                     indicated as described in Fig. 2. A 3-coloring 𝜎 ∶ 𝑉 (𝑁) → {∙, ◦, ×} associated
+Fig. 2. The 2-network 𝑁                    for 𝑋 = {𝑎, 𝑏, 𝑐, 𝑑, 𝑒} and  =           to the proper 3-coloring 𝜅 of 𝐺 given by 𝜅(𝑎) = 𝜅(𝑑) = ∙, 𝜅(𝑏) = 𝜅(𝑒) = ◦ and
+{{𝑎, 𝑏, 𝑐}, {𝑎, 𝑐, 𝑒}, {𝑏, 𝑐, 𝑑}}, as described in the proof of Theorem 4.1.         𝜅(𝑐) = ×.
+Gen1, Gen2, and Gen3 vertices are indicated as vertices in a band labeled
+Gen1, Gen2, and Gen3, respectively. For clarity purposes, we have indicated
+the reticulation with the set in  its three parents correspond to and not the
+                                                                                         To see that (C1) holds, note ﬁrst that, by construction, all non-root
+parents themselves. A 2-coloring 𝜎 ∶ 𝑉 (𝑁) → {∙, ◦} associated to the solution       vertices 𝑣 of 𝑁 have at least one parent 𝑢 satisfying 𝜎(𝑢) = 𝜎(𝑣). Suppose
+𝐴 = {𝑎, 𝑏}, 𝐵 = {𝑐, 𝑑, 𝑒} of the S ET -S PLITTING problem for (𝑋, ).                now that 𝑣 is a reticulation. Then 𝑣 is either a Gen1 reticulation or
+                                                                                     𝑣 = ℎ𝑒 for some edge 𝑒 of 𝐺 . If 𝑣 is a Gen1 reticulation then 𝑣 ∈ 𝑋 .
+                                                                                     Hence, 𝑣 has 𝑚 parents 𝑣1 , … , 𝑣𝑚 . Since, for each 1 ≤ 𝑖 ≤ 𝑚, there exists
+   Note that this problem can be solved in polynomial time for 𝑚 = 2
+                                                                                     a unique tree 𝑇𝑖 that contains 𝑣𝑖 it follows that there exists a unique
+but is NP-complete for each 𝑚 ≥ 3. Hence, the reduction below can only
+                                                                                     1 ≤ 𝑗 ≤ 𝑚 such that 𝜎(𝑣) = 𝜎(𝑣𝑗 ) = 𝑗 . If 𝑣 = ℎ𝑒 then let 𝑥, 𝑦 ∈ 𝑋 such that
+be used for 𝑚 ≥ 3.
+                                                                                     𝑒 = {𝑥, 𝑦}. Without loss of generality, assume that 𝑣1 is a vertex on 𝑃𝑥
+                                                                                     and that 𝑣2 is a vertex on 𝑃𝑦 . Assume that we have chosen 𝜎(ℎ𝑒 ) = 𝜅(𝑥)
+Proposition 5.1. For each ﬁxed 𝑚 ≥ 3, the problem of determining whether
+                                                                                     in the deﬁnition of 𝜎 . Then 𝜎(ℎ𝑒 ) = 𝜅(𝑥) = 𝜎(𝑣1 ). Since 𝜅 is a proper
+a tree-child 𝑚-network is proper forest-based is NP-complete.
+                                                                                     𝑚-coloring of 𝐺 , we also have 𝜎(𝑣2 ) = 𝜅(𝑦) ≠ 𝜅(𝑥). Thus, (C1) holds.
+                                                                                         To see that (C2) holds, let 𝑣 ∈ 𝑉 (𝑁) − 𝐿(𝑁). If 𝑣 is a Gen1 vertex
+Proof. Membership of NP can be argued in the same way as in the                      that is not a reticulation, then 𝑣 has at least one child 𝑢 that is a Gen1
+proof of Theorem 4.1. We prove NP-completeness by giving a reduction                 vertex that is not a reticulation. In particular, 𝑣 and 𝑢 belong to the
+from G RAPH 𝑚 - COLORABILTY.                                                         same tree 𝑇𝑖 , 1 ≤ 𝑖 ≤ 𝑚. Hence, 𝜎(𝑣) = 𝜎(𝑢), by the deﬁnition of 𝜎 . If 𝑣
+    Suppose that we are given a graph 𝐺 with vertex set 𝑋 . Then we                  is a Gen2 vertex or a Gen1 reticulation, then 𝑣 has exactly one child 𝑢
+construct an 𝑚-network 𝑁 as follows (see Fig. 3 where we illustrate the              that is a Gen2 vertex. By deﬁnition, 𝜎(𝑢) = 𝜎(𝑣) also holds in this case.
+various constructions performed in this proof in terms of an example).               Finally, if 𝑣 is a Gen3 vertex, then 𝑣 = ℎ𝑒 for some edge 𝑒 of 𝐺 . Hence,
+Let 𝑇1 , … , 𝑇𝑚 denote 𝑚 isomorphic caterpillars trees on a set 𝑌 with               𝜎(𝓁𝑒 ) = 𝜎(𝑣) holds by deﬁnition. Thus, (C2) holds.
+|𝑋| + 1 leaves. Without loss of generality we may assume that 𝑌 = 𝑋 ∪                    Conversely, suppose that 𝑁 is proper forest-based. By Lemma 3.1,
+{𝓁} and that 𝓁 ∉ 𝑋 is a leaf in the unique cherry of 𝑇1 (and therefore               there exists an 𝑚-coloring 𝜎 ∶ 𝑉 (𝑁) → {1 … , 𝑚} of 𝑁 satisfying (C1)
+also of all 𝑇𝑖 , 2 ≤ 𝑖 ≤ 𝑚). For all 𝑥 ∈ 𝑋 and all 1 ≤ 𝑖 ≤ 𝑚, we identify the        and (C2). Since the set of Gen1 reticulations of 𝑁 is 𝑋 , the restriction
+leaves 𝑥 to obtain a vertex 𝑥 of indegree 𝑚. We call all vertices in the             of 𝜎 to 𝑋 induces an 𝑚-coloring 𝜅 ∶ 𝑋 → {1, … , 𝑚} of 𝐺 .
+resulting graph Gen1 vertices.                                                           We claim that 𝜅 is a proper 𝑚-coloring of 𝐺 . To see the claim, con-
+    Denoting for all 𝑥 ∈ 𝑋 the degree of 𝑥 in 𝐺 by deg𝐺 (𝑥), we attach               sider an edge 𝑒 = {𝑥, 𝑦} of 𝐺 . By construction, there exists a (unique)
+a directed path 𝑃𝑥 of length deg𝐺 (𝑥) + 1 via an arc (𝑥, 𝑎𝑥 ) to the ﬁrst            Gen3 reticulation 𝑣 such that 𝑣 = ℎ𝑒 . Let 𝑣1 denote the parent of ℎ𝑒 on
+vertex 𝑎𝑥 of 𝑃𝑥 . We label each internal vertex of 𝑃𝑥 with an edge in 𝐺              𝑃𝑥 . Similarly, let 𝑣2 denote the parent of ℎ𝑒 on 𝑃𝑦 . By (C1), 𝜎(𝑣1 ) = 𝜅(𝑥)
+that is incident with 𝑥 and call all vertices added during this step Gen2            and 𝜎(𝑣2 ) = 𝜅(𝑦) hold. Since, by (C2), 𝜎(ℎ𝑒 ) = 𝜎(𝑣𝑖 ) for a unique
+vertices. Finally, for all edges 𝑒 of 𝐺 , we create a new reticulation ℎ𝑒            𝑖 ∈ {1, 2}, say 𝑖 = 1, it follows that 𝜅(𝑦) = 𝜎(𝑣2 ) ≠ 𝜎(ℎ𝑒 ) = 𝜎(𝑣1 ) = 𝜅(𝑥).
+with parents the two vertices in the DAG constructed thus far labeled                Thus, 𝜅 is a proper 𝑚-coloring of 𝐺 . □
+𝑒 and add a leaf 𝓁𝑒 as a child to ℎ𝑒 . We call vertices added during this
+step Gen3 vertices.
+                                                                                     6. Binary tree-child networks
+    Let 𝑁 denote the resulting DAG. One can easily verify that 𝑁 is an
+𝑚-network that is tree-child. We now show that there exists a solution
+                                                                                        In this section, we prove Statements (R1) and (R2). We begin with
+to G RAPH 𝑚 - COLORABILTY for 𝐺 if and only if 𝑁 is proper forest-based,
+                                                                                     some deﬁnitions. Suppose 𝑁 is an 𝑚-network and 𝑣 ∈ 𝑉 (𝑁). We denote
+which will complete the proof.
+                                                                                     by 𝑁 (𝑣) the set of parents of 𝑣 and by 𝑁 (𝑣) the set of children of 𝑣.
+    Suppose ﬁrst that there exists a proper 𝑚-coloring 𝜅 ∶ 𝑋 →
+                                                                                        Statement (R2) follows from the following result.
+{1, … , 𝑚} of 𝐺 . From 𝜅 , we derive an 𝑚-coloring 𝜎 ∶ 𝑉 (𝑁) → {1, … , 𝑚}
+of 𝑁 as follows. Let 𝑣 ∈ 𝑉 (𝑁). If 𝑣 is a Gen1 tree-vertex then there ex-
+ists some 1 ≤ 𝑖 ≤ 𝑚 such that 𝑣 ∈ 𝑉 (𝑇𝑖 ). In this case, we put 𝜎(𝑣) = 𝑖.            Theorem 6.1. For each ﬁxed 𝑚 ≥ 3, the problem of determining whether a
+If 𝑣 is a Gen2 vertex or a Gen1 reticulation, then 𝑣 ∈ {𝑥} ∪ 𝑉 (𝑃𝑥 ) for             binary tree-child 𝑚-network is proper forest-based is NP-complete.
+some 𝑥 ∈ 𝑋 , and we put 𝜎(𝑣) = 𝜅(𝑥). Finally, if 𝑣 is a Gen3 vertex,
+then 𝑣 ∈ {ℎ𝑒 , 𝓁𝑒 } for some edge 𝑒 = {𝑥, 𝑦} of 𝐺 . In this case, we choose          Proof. Membership of NP follows from Proposition 5.1. We again re-
+𝜎(𝑣) ∈ {𝜅(𝑥), 𝜅(𝑦)} if 𝑣 = ℎ𝑒 and we put 𝜎(𝑣) = 𝜎(ℎ𝑒 ) if 𝑣 = 𝓁𝑒 .                   duce from the G RAPH 𝑚 - COLORABILTY problem. Suppose 𝐺 is a graph
+    To see that 𝑁 is proper forest-based it suﬃces to show by Lemma 3.1              with vertex set 𝑋 . We use the construction described in the proof of
+that 𝜎 satisﬁes Properties (C1) and (C2).                                            Proposition 5.1 to obtain a tree-child 𝑚-network 𝑁 𝑠 . We then create a
+
+                                                                                 4
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                                                    Information Processing Letters 187 (2025) 106500
+
+
+binary tree-child network 𝑁 𝑏 from 𝑁 𝑠 by applying the following opera-
+tion to each reticulation 𝑥 with indegree 𝑑 ≥ 3 (by construction, 𝑑 = 𝑚).
+
+  (i) Introduce vertices 𝑢2 , 𝑣2 , 𝑤2 , … , 𝑢𝑑−1 , 𝑣𝑑−1 , 𝑤𝑑−1 .
+ (ii) Remove arcs (𝑝1 , 𝑥), … , (𝑝𝑑−1 , 𝑥), with 𝑝1 , … , 𝑝𝑑 the parents of 𝑥
+      in 𝑁 𝑠 (in arbitrary order).
+(iii) Add arcs (𝑝1 , 𝑢2 ), (𝑝𝑖 , 𝑢𝑖 ), (𝑢𝑖 , 𝑣𝑖 ), (𝑣𝑖 , 𝑤𝑖 ), (𝑣𝑖 , 𝑢𝑖+1 ) for 𝑖 = 2, … , 𝑑 − 1
+      with 𝑢𝑑 = 𝑥.
+
+    We illustrate the above construction for a reticulation with indegree
+𝑑 = 4 in Fig. 4. We comment that, for a general tree-child network 𝑁 𝑠 ,
+                                                                                                       Fig. 4. (i) A reticulation 𝑥 with 4 parents 𝑝1 , … , 𝑝4 . (ii) The construction de-
+it does not necessarily hold that 𝑁 𝑠 is proper forest-based if and only
+                                                                                                       scribed in the proof of Theorem 6.1, which reduces the indegree of 𝑥 to 2.
+if 𝑁 𝑏 is proper forest-based. Therefore, we will use the speciﬁc structure
+of the network 𝑁 𝑠 constructed here.
+    We next show that 𝑁 𝑏 is proper forest-based if and only if 𝐺 admits
+a proper 𝑚-coloring. Suppose ﬁrst that 𝐺 admits a proper 𝑚-coloring.
+Then, by the proof of Proposition 5.1, 𝑁 𝑠 is proper forest-based. Hence,
+there exists an 𝑚-coloring 𝜎 ∶ 𝑉 (𝑁 𝑠 ) → 𝐶 of 𝑁 𝑠 in terms of a set 𝐶 of
+colors such that (C1) and (C2) hold.
+     We deﬁne an 𝑚-coloring 𝜎 ′ ∶ 𝑉 (𝑁 𝑏 ) → 𝐶 of 𝑁 𝑏 as follows. For 𝑤 ∈
+𝑉 (𝑁 𝑠 ), we put 𝜎 ′ (𝑤) = 𝜎(𝑤). For each vertex introduced in Step (i)
+for some reticulation 𝑥, we do the following. Let 𝑝𝑗 be the parent of 𝑥
+satisfying 𝜎(𝑝𝑗 ) = 𝜎(𝑥) (which must exist in view of (C1)). For 1 < 𝑖 < 𝑗 ,
+we put 𝜎 ′ (𝑢𝑖 ) = 𝜎 ′ (𝑣𝑖 ) = 𝜎 ′ (𝑤𝑖 ) = 𝜎(𝑝1 ). For 𝑗 ≤ 𝑖 ≤ 𝑑 − 1 we put 𝜎 ′ (𝑢𝑖 ) =                Fig. 5. (i) A forest-based 3-network on 𝑋 = {𝑎, 𝑏, 𝑐, 𝑑, 𝑒, 𝑓 , 𝑔, ℎ, 𝑖, 𝑗}. (ii) The
+𝜎 ′ (𝑣𝑖 ) = 𝜎 ′ (𝑤𝑖 ) = 𝜎(𝑥) = 𝜎(𝑝𝑗 ). To see that 𝑁 𝑏 is proper forest-based, we                      graph with vertices 𝑟1 , 𝑟2 , 𝑟3 , ℎ1 , ℎ2 and ℎ3 and solid edges {𝑟1 , 𝑟2 } and {𝑟2 , 𝑟3 }
+show that 𝜎 ′ satisﬁes (C1) and (C2).                                                                  is the graph Γ(𝑁). Adding the dashed edge {𝑟1 , ℎ3 } results in a minimal omni-
+     To see that 𝜎 ′ satisﬁes (C1), let 𝑤 be a non-root vertex of 𝑁 𝑏 . If 𝑤 ∈                         extension of Γ(𝑁).
+𝑉 (𝑁 𝑠 ) and 𝑤 has indegree at most 2 in 𝑁 𝑠 , then 𝑁 𝑠 (𝑤) = 𝑁 𝑏 (𝑤),
+𝜎 ′ (𝑤) = 𝜎(𝑤), and 𝜎 ′ (𝑞) = 𝜎(𝑞), for all parents 𝑞 ∈ 𝑁 𝑠 (𝑤). By (C1),
+there exists exactly one parent 𝑞 in 𝑁 𝑠 (𝑤) that satisﬁes 𝜎(𝑞) = 𝜎(𝑤). It                                To prove the next result, we require further concepts from [9]. Let
+follows that 𝑞 is the unique parent in 𝑁 𝑏 (𝑤) satisfying 𝜎 ′ (𝑞) = 𝜎 ′ (𝑤).                          𝑁 be a semi-binary 𝑚-network, 𝑚 ≥ 2, and let 𝑣 be a vertex of 𝑁 .
+So, (C1) holds.                                                                                        We denote by 𝛾𝑁 (𝑣) the (necessarily unique) lowest ancestor of 𝑣 in 𝑁
+     Now assume 𝑤 is introduced in Step (i) for some reticulation 𝑥. Let                               whose indegree is not 1. Note that 𝛾𝑁 (𝑣) is either a root or a reticulation
+𝑝𝑗 again be the parent of 𝑥 satisfying 𝜎(𝑝𝑗 ) = 𝜎(𝑥).                                                  of 𝑁 . Building on this deﬁnition, we deﬁne an undirected graph Γ(𝑁)
+     If 𝑤 ∈ {𝑣𝑖 , 𝑤𝑖 }, for some 2 ≤ 𝑖 ≤ 𝑑 − 1, then 𝑤 has exactly one par-                            as follows. The vertex set of Γ(𝑁) is the set of all vertices of 𝑁 whose
+ent 𝑞 and 𝜎 ′ (𝑤) = 𝜎 ′ (𝑞). So (C1) holds.                                                            indegree is not 1. Two such vertices 𝑣1 , 𝑣2 are joined by an edge in
+     Before continuing to the next case, observe that, since every root                                Γ(𝑁) if there exists two distinct vertices 𝑢1 , 𝑢2 in 𝑁 such that 𝛾𝑁 (𝑢1 ) =
+of 𝑁 has a diﬀerent color, the parents of 𝑥 in 𝑁 𝑠 also have diﬀerent                                  𝑣1 , 𝛾𝑁 (𝑢2 ) = 𝑣2 , and 𝑢1 and 𝑢2 share a child in 𝑁 . The intuitive idea
+colors, by (C1).                                                                                       behind these edges is that they indicate that the vertices 𝑣1 , 𝑣2 need to
+     Now consider the case 𝑤 = 𝑢𝑖 for 𝑖 ∈ {2, … , 𝑗 − 1}. Then 𝑤 has two                               be contained in diﬀerent trees in a potential subdivision forest of 𝑁 and
+parents 𝑣𝑖−1 , 𝑝𝑖 , with 𝑣1 = 𝑝1 , and 𝜎 ′ (𝑤) = 𝜎 ′ (𝑣𝑖−1 ) = 𝜎 ′ (𝑝1 ) ≠ 𝜎 ′ (𝑝𝑖 ). So               so need to be assigned diﬀerent colors. Indeed, for an 𝑚-coloring 𝜎 of
+(C1) holds.                                                                                            𝑁 satisfying (C1) and (C2), 𝜎(𝑢1 ) = 𝜎(𝑣1 ) and 𝜎(𝑢2 ) = 𝜎(𝑣2 ) must hold
+     If 𝑤 = 𝑢𝑗 , then 𝑤 has two parents 𝑣𝑗−1 , 𝑝𝑗 and 𝜎 ′ (𝑤) = 𝜎 ′ (𝑝𝑗 ) ≠                            by (C1) and by deﬁnition of 𝛾𝑁 (𝑣), 𝑣 ∈ 𝑉 (𝑁). Property (C1) together
+𝜎 ′ (𝑣𝑗−1 ) = 𝜎 ′ (𝑝1 ). So (C1) holds.                                                                with the fact that the common child of 𝑢1 and 𝑢2 has indegree 2 implies
+     Finally assume 𝑤 = 𝑢𝑖 for 𝑖 ∈ {𝑗 + 1, … , 𝑑} with 𝑢𝑑 = 𝑥. Then 𝑤 has                              𝜎(𝑢1 ) ≠ 𝜎(𝑢2 ).
+two parents 𝑣𝑖−1 , 𝑝𝑖 and 𝜎 ′ (𝑤) = 𝜎 ′ (𝑣𝑖−1 ) = 𝜎 ′ (𝑝𝑗 ) ≠ 𝜎 ′ (𝑝𝑖 ). So (C1) holds                      As it turns out, the edges of the graph Γ(𝑁) are not suﬃcient to
+again.                                                                                                 determine whether 𝑁 is proper forest-based. This is caused by internal
+     To show that 𝜎 ′ also satisﬁes (C2), consider an internal vertex 𝑤                                vertices of 𝑁 for which all children have indegree 2 or more. We call
+of 𝑁 𝑏 . First suppose 𝑤 ∈ 𝑉 (𝑁 𝑠 ) and 𝑤 is not a parent of a reticulation                            such a vertex an omnian (vertex) [10]. In order for (C2) to hold, for all
+with indegree greater than 2 in 𝑁 𝑠 . Then 𝑁 𝑠 (𝑤) = 𝑁 𝑏 (𝑤). In par-                                omnian vertices 𝑣 of 𝑁 , at least one child of 𝑣 needs to be assigned
+ticular, 𝜎 ′ (𝑤) = 𝜎(𝑤) and 𝜎 ′ (𝑧) = 𝜎(𝑧), for all children 𝑧 ∈ 𝑁 𝑠 (𝑤). By                          the same color as 𝑣. To ensure that this property is satisﬁed, we will
+(C2), there exists at least one child 𝑧 ∈ 𝑁 𝑠 (𝑤) with 𝜎(𝑧) = 𝜎(𝑤). So                                use certain supergraphs of Γ(𝑁) called “omni-extensions”. For a semi-
+𝜎 ′ (𝑧) = 𝜎 ′ (𝑤) holds.                                                                               binary network 𝑁 , we deﬁne an omni-extension of Γ(𝑁) as a supergraph
+     Now assume 𝑤 is introduced in Step (i) for some reticulation 𝑥.                                   Γ′ (𝑁) of Γ(𝑁) such that 𝑉 (Γ′ (𝑁)) = 𝑉 (Γ(𝑁)) and for all omnians 𝑣 of
+Then, by the construction of 𝜎 ′ , 𝑤 has the same color as at least one of                             𝑁 there exists a child ℎ of 𝑣 such that {ℎ, 𝛾𝑁 (𝑢)} is an edge of Γ′ (𝑁),
+its children.                                                                                          with 𝑢 being the parent of ℎ in 𝑁 other than 𝑣 [8]. Note that Γ(𝑁) may
+     Now assume 𝑤 is a parent of a reticulation with indegree greater                                  be an omni-extension of itself. This is the case, in particular, if 𝑁 has no
+than 2 in 𝑁 𝑠 . Then 𝑤 has a child 𝑐 with indegree 1 in 𝑁 𝑠 and with                                   omnian vertex. If Γ′ (𝑁) is an omni-extension of Γ(𝑁), and no proper
+𝜎(𝑐) = 𝜎 ′ (𝑐). Hence, 𝜎(𝑐) = 𝜎(𝑤) and 𝜎 ′ (𝑐) = 𝜎 ′ (𝑝). So, 𝜎 ′ satisﬁes (C2).                       subgraph of Γ′ (𝑁) is an omni-extension of Γ(𝑁), we say that Γ′ (𝑁) is
+     Conversely suppose 𝑁 𝑏 is proper forest-based. Then there exists an                               a minimal omni-extension of Γ(𝑁).
+𝑚-coloring 𝜎 of 𝑁 𝑏 in terms of a set 𝐶 of colors that satisﬁes Prop-                                      We illustrate these concepts in Fig. 5. Observe that the common
+erties (C1) and (C2). Restricting this coloring to 𝑋 to obtain a color-                                parent 𝑣 of ℎ1 and ℎ3 in Fig. 5(i) is an omnian. At least one of the
+ing 𝜅 ∶ 𝑋 → 𝐶 and then applying the same arguments as in the last                                      children of 𝑣 needs to be assigned the same color as 𝑣 (in a coloring
+paragraph of the proof of Proposition 5.1 implies that 𝜅 is a proper 𝑚-                                satisfying (C2) in Lemma 3.1). In this example, we choose child ℎ3 as ℎ.
+coloring of 𝐺 . Note that these arguments only use the vertices in 𝑋 and                               This means that the other parent 𝑢 of ℎ3 needs to be assigned a diﬀerent
+their descendants and hence they are the same for 𝑁 𝑏 as for 𝑁 𝑠 . □                                   color than ℎ3 (by (C1)) and hence that 𝛾𝑁 (𝑢) = 𝑟3 needs to be assigned
+
+                                                                                                   5
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                         Information Processing Letters 187 (2025) 106500
+
+
+a diﬀerent color than ℎ3 (again using (C1)). This is the intuitive idea                Correctness of the algorithm C HECK follows from Theorem 7.1 which
+behind adding the dashed edge {ℎ3 , 𝑟3 } in Fig. 5(ii).                            is a slight strengthening of [8, Theorem 7] to minimal omni-extensions.
+   Statement (R1) is a consequence of the next result.
+                                                                                   Theorem 7.1. Let 𝑁 be a semi-binary 𝑚-network, 𝑚 ≥ 2. Then 𝑁 is proper
+Theorem 6.2. Given a binary tree-child 2-network 𝑁 , it can be determined          forest-based if and only if there exists a minimal omni-extension Γ′ (𝑁) of
+in 𝑂(𝑛𝑟) time whether 𝑁 is proper forest-based, where 𝑟 is the number of           Γ(𝑁) and a proper 𝑚-coloring 𝜎 of Γ′ (𝑁) satisfying:
+reticulations of 𝑁 and 𝑛 = |𝐿(𝑁)|.
+                                                                                   (F1) The restriction of 𝜎 to the set 𝑅(𝑁) of roots of 𝑁 is a bijection.
+                                                                                   (F2) For all 𝑢 ∈ 𝑅(𝑁) and all reticulations 𝑣 of 𝑁 such that 𝜎(𝑢) = 𝜎(𝑣)
+Proof. [8, Theorem 8] states that a 2-network, in which all retic-
+                                                                                        there exists a 𝜎 -uniform path from 𝑢 to 𝑣 in 𝑁 .
+ulations have indegree 2, is proper forest-based if and only if the
+graph Γ(𝑁) has a bipartite omni-extension. This theorem is applica-
+ble to 𝑁 since it is binary. Since 𝑁 is tree-child, it has no omnians.             Proof. Suppose ﬁrst that there exists a minimal omni-extension Γ′ (𝑁)
+Hence, Γ(𝑁) is an omni-extension of Γ(𝑁).                                          of Γ(𝑁) and a proper 𝑚-coloring of Γ′ (𝑁) satisfying (F1) and (F2). Then
+    We claim that 𝑁 is proper forest-based if and only if Γ(𝑁) is bi-              by [8, Theorem 7], 𝑁 is proper forest-based.
+partite. First suppose that 𝑁 is proper forest-based. Then, by [8, Theo-               Conversely, suppose that 𝑁 is proper forest-based. Then by [8,
+rem 8] recalled above, Γ(𝑁) has a bipartite omni-extension. Since Γ(𝑁)             Theorem 7], there exists an omni-extension 𝐺 of Γ(𝑁) and a proper
+is a subgraph of every omni-extension of Γ(𝑁), it follows that Γ(𝑁) is             𝑚-coloring 𝜎 of 𝐺 satisfying (F1) and (F2). Since (F1) and (F2) are in-
+bipartite. Conversely, if Γ(𝑁) is bipartite, then, since Γ(𝑁) is an omni-          dependent of the structure of 𝐺 , it follows for all subgraphs 𝐺− of 𝐺
+extension of Γ(𝑁), it follows again by [8, Theorem 8] recalled above               with 𝑉 (𝐺) = 𝑉 (𝐺− ) that 𝜎 is a proper 𝑚-coloring of 𝐺− satisfying (F1)
+that 𝑁 is proper forest-based. The claim therefore holds.                          and (F2). In particular, if there exists an omni-extension of Γ(𝑁) and
+    To construct Γ(𝑁), we need to ﬁnd, for each parent 𝑣 of a reticula-            a proper 𝑚-coloring of 𝐺 satisfying (F1) and (F2), then there exists a
+tion of 𝑁 , the vertex 𝛾𝑁 (𝑣). This takes 𝑂(|𝑉 (𝑁)|) time per reticulation         minimal omni-extension of Γ(𝑁) and a proper 𝑚-coloring of 𝐺 satisfy-
+of 𝑁 . Hence, the construction of Γ(𝑁) takes 𝑂(|𝑉 (𝑁)| ⋅ 𝑟) time. Check-           ing (F1) and (F2). □
+ing whether Γ(𝑁) is bipartite takes 𝑂(𝑟) time, since Γ(𝑁) has at most 𝑟
+edges. Hence, the total running time is 𝑂(|𝑉 (𝑁)| ⋅ 𝑟).                                We now analyze the run time of algorithm C HECK. The graph Γ(𝑁)
+    Finally, to obtain the running time stated in the theorem, note that           can be constructed in 𝑂(𝑟|𝑉 (𝑁)|) time and can have at most Δ𝜔 mini-
+by [14, Proposition 10.7] a tree-child 1-network with 𝑛 leaves has fewer           mal omni-extensions where 𝜔 is the number of omnians of 𝑁 . Since 𝑁
+than 4𝑛 vertices. Adding a vertex 𝜌 and an arc from 𝜌 to each of the two           is semi-binary, 𝜔 is at most 2𝑟 (each omnian is the parent of at least
+roots in 𝑁 results in a tree-child 1-network, and increases the number             one reticulation and each reticulation has two parents). All proper 𝑚-
+of vertices by only 1. It follows that 𝑁 has 𝑂(𝑛) vertices. This concludes         colorings of Γ∗ (𝑁) can be found in 𝑂(𝑚𝑟+𝑚 (𝑟 + 𝑚)2 ) time since Γ∗ (𝑁)
+the proof. □                                                                       has 𝑟 + 𝑚 vertices (Line 4). Since, by construction, the set of roots of 𝑁
+                                                                                   forms a clique in Γ∗ (𝑁) and we are interested in proper 𝑚-colorings of
+7. An FPT algorithm                                                                Γ∗ (𝑁) it follows that for every reticulation ℎ of 𝑁 there exist a unique
+                                                                                   root 𝜌ℎ of 𝑁 that has the same color under the 𝑚-coloring 𝜎 under con-
+                                                                                   sideration as ℎ. In the worst case, checking the existence of a 𝜎 -uniform
+    In this section, we shall present a ﬁxed-parameter tractable (FPT)
+                                                                                   path from 𝜌ℎ to ℎ in 𝑁 takes 𝑂(|𝑉 (𝑁)|) time per pair (𝜌ℎ , ℎ) (by delet-
+algorithm called C HECK for deciding whether a semi-binary 𝑚-network
+                                                                                   ing all reticulations that do not have the same color as 𝜌ℎ and then
+𝑁 , 𝑚 ≥ 2, is forest-based, with respect to the parameter combination of
+                                                                                   doing a depth-ﬁrst search) (Line 7). The total run time of algorithm
+𝑚, the number 𝑟 of reticulations of 𝑁 , and the maximum outdegree Δ
+                                                                                   C HECK therefore is 𝑂(Δ2𝑟 𝑚𝑟+𝑚 (𝑟 + 𝑚)2 |𝑉 (𝑁)|).
+of 𝑁 . This will enable us to prove that Statement (R4) holds. Note that
+                                                                                       In conclusion, we have the following result from which State-
+we do not require the network to be tree-child.
+                                                                                   ment (R4) immediately follows.
+    For 𝑁 an 𝑚-network, 𝑚 ≥ 2, we denote the set of roots and reticu-
+lations of 𝑁 by 𝑅𝐻(𝑁). Note that 𝑅𝐻(𝑁) is precisely the vertex set
+of Γ(𝑁). For 𝐺 a graph with vertex set 𝑅𝐻(𝑁) and 𝜎 a coloring of 𝐺 ,               Theorem 7.2. There exists an algorithm with running time 𝑂(Δ2𝑟 𝑚𝑟+𝑚 (𝑟 +
+we say that a directed path 𝑃 in 𝑁 is a 𝜎 -uniform path if for all vertices        𝑚)2 |𝑉 (𝑁)|) to decide whether a semi-binary 𝑚-network with 𝑟 reticulations
+𝑣, 𝑣′ ∈ 𝑅𝐻(𝑁) on 𝑃 , we have 𝜎(𝑣) = 𝜎(𝑣′ ). Note that a directed path in           and maximum outdegree Δ is proper forest-based, with 𝑚 ≥ 2.
+𝑁 containing at most one vertex of 𝑅𝐻(𝑁) is trivially 𝜎 -uniform.
+                                                                                   8. Discussion
+
+Algorithm 1 The algorithm C HECK.
+                                                                                       In this paper, we have shown that it can be decided in polynomial
+Input: A semi-binary 𝑚-network 𝑁 , 𝑚 ≥ 2.
+                                                                                   time whether a binary, tree-child, 2-network is proper forest-based. It
+Output: The statement “𝑁 is proper forest-based” or the statement “𝑁 is not
+      proper forest-based”.
+                                                                                   would be interesting to know if the same problem can be solved in
+ 1: Construct Γ(𝑁) and ﬁnd all minimal omni-extensions of Γ(𝑁).                    polynomial time for more general binary 2-networks, e.g. for binary
+ 2: for all minimal omni-extension of Γ(𝑁) do                                      tree-sibling 2-networks (i.e. 2-networks in which for every reticulation
+ 3:    Add an edge between any two distinct roots                                  𝑣, there exists a tree-vertex or leaf 𝑢 such that 𝑢 and 𝑣 share a par-
+         of 𝑁 to obtain a graph Γ∗ (𝑁).                                            ent) or even for general binary 2-networks. In addition, although we
+ 4:      Find all proper 𝑚-colorings of Γ∗ (𝑁).                                    have shown that there is an FPT algorithm for deciding whether a semi-
+ 5:      for all proper 𝑚-coloring 𝜎 of Γ∗ (𝑁) do                                  binary 𝑚-network, 𝑚 ≥ 2 is proper forest-based, it would be interesting
+ 6:         for all reticulations ℎ of 𝑁 and all roots 𝜌 of                        to see if FPT-algorithms with improved run-times can be developed, or
+             𝑁 with 𝜎(𝜌) = 𝜎(ℎ) do                                                 if an FTP algorithm can be found for general 𝑚-networks.
+ 7:             Check that there exists a 𝜎 -uniform path from 𝜌 to ℎ in 𝑁 .
+                                                                                       Also, we have not considered the problem of deciding whether an
+ 8:         if the latter holds for all reticulations ℎ of 𝑁
+                                                                                   𝑚-network is forest-based, 𝑚 ≥ 1, i.e. the problem where we do not in-
+            and all roots 𝜌 of 𝑁 with 𝜎(𝜌) = 𝜎(ℎ) then
+                                                                                   sist that the underlying forest must have 𝑚 trees. It would be interesting
+ 9:             return “𝑁 is proper forest-based”.
+                                                                                   to know whether this is an NP-complete problem. Note that since an 𝑚-
+10: return “𝑁 is not proper forest-based”.
+                                                                                   network 𝑁 is forest-based if and only if it contains a subdivision forest
+
+                                                                               6
+K.T. Huber, L. van Iersel, V. Moulton et al.                                                                             Information Processing Letters 187 (2025) 106500
+
+
+in which every tree is an induced, directed path in 𝑁 (cf. [8, Theo-            References
+rem 1]), this question is closely related to the induced path partition
+problem which is known to be NP-complete [2].                                    [1] N.B. Edelman, P.B. Frandsen, M. Miyagi, B. Clavijo, J. Davey, R.B. Dikow, G. García-
+   Finally, as more methods become available for computing networks                  Accinelli, S.M. Van Belleghem, N. Patterson, D.E. Neafsey, et al., Genomic archi-
+                                                                                     tecture and introgression shape a butterﬂy radiation, Science 366 (6465) (2019)
+from biological data (see e.g. [17]), our results should be useful for
+                                                                                     594–599.
+understanding whether a computed network is proper forest-based. It              [2] H. Fernau, F. Foucaud, K. Mann, U. Padariya, K.N.R. Rao, Parameterizing path par-
+could also be interesting to develop approaches to decide how close a                titions, in: International Conference on Algorithms and Complexity, Springer, 2023,
+network is to being forest-based in case it is not forest based (see e.g.            pp. 187–201.
+[3] for related work on edge-based 1-networks).                                  [3] M. Fischer, T.N. Hamann, K. Wicke, How far is my network from being edge-based?
+                                                                                     Proximity measures for edge-basedness of unrooted phylogenetic networks, Discrete
+                                                                                     Appl. Math. 337 (2023) 303–320.
+CRediT authorship contribution statement                                         [4] A. Francis, K.T. Huber, V. Moulton, Tree-based unrooted phylogenetic networks,
+                                                                                     Bull. Math. Biol. 80 (2018) 404–416.
+    Katharina T. Huber: Writing – review & editing, Writing – origi-             [5] A. Francis, M. Steel, Labellable phylogenetic networks, Bull. Math. Biol. 85 (6)
+                                                                                     (2023) 46.
+nal draft, Formal analysis, Conceptualization. Leo van Iersel: Writing –
+                                                                                 [6] A.R. Francis, M. Steel, Which phylogenetic networks are merely trees with addi-
+review & editing, Writing – original draft, Formal analysis, Conceptual-             tional arcs?, Syst. Biol. 64 (5) (2015) 768–777.
+ization. Vincent Moulton: Writing – review & editing, Writing – orig-            [7] M.R. Garey, D.S. Johnson, Computers and Intractability: A Guide to the Theory of
+inal draft, Formal analysis, Conceptualization. Guillaume E. Scholz:                 on NP-Completeness, Freeman, 1979.
+Writing – review & editing, Writing – original draft, Formal analysis,           [8] K.T. Huber, V. Moulton, G.E. Scholz, Forest-based networks, Bull. Math. Biol. (2022)
+                                                                                     119.
+Conceptualization.
+                                                                                 [9] K.T. Huber, V. Moulton, G.E. Scholz, Overlaid species forest, Discrete Appl. Math.
+                                                                                     309 (2022).
+Declaration of competing interest                                               [10] L. Jetten, L. van Iersel, Nonbinary tree-based phylogenetic networks, IEEE/ACM
+                                                                                     Trans. Comput. Biol. Bioinform. 15 (1) (2016) 205–217.
+                                                                                [11] S. Kong, J.C. Pons, L. Kubatko, K. Wicke, Classes of explicit phylogenetic networks
+    The authors declare that they have no known competing ﬁnancial
+                                                                                     and their biological and mathematical signiﬁcance, J. Math. Biol. 84 (6) (2022) 47.
+interests or personal relationships that could have appeared to inﬂuence        [12] V. Moulton, T. Wu, Planar rooted phylogenetic networks, IEEE/ACM Trans. Comput.
+the work reported in this paper.                                                     Biol. Bioinform. 20 (2) (2022) 1289–1297.
+                                                                                [13] G.E. Scholz, A.A. Popescu, M.I. Taylor, V. Moulton, K.T. Huber, OSF-Builder: a new
+Data availability                                                                    tool for constructing and representing evolutionary histories involving introgression,
+                                                                                     Syst. Biol. 68 (2019) 717–729.
+                                                                                [14] M. Steel, Phylogeny: Discrete and Random Processes in Evolution, SIAM, 2016.
+    No data was used for the research described in the article.                 [15] L. van Iersel, R. Janssen, M. Jones, Y. Murakami, Orchard networks are trees with
+                                                                                     additional horizontal arcs, Bull. Math. Biol. 84 (8) (2022) 76.
+Acknowledgement                                                                 [16] R.W.R. Wallbank, S.W. Baxter, C. Pardo-Diaz, J.J. Hanly, S.H. Martin, J. Mallet,
+                                                                                     K.K. Dasmahapatra, C. Salazar, M. Joron, N. Nadeau, et al., Evolutionary novelty
+                                                                                     in a butterﬂy wing pattern through enhancer shuﬄing, PLoS Biol. 14 (1) (2016)
+   The authors thank the Institute Mittag-Leﬄer, Sweden, for hosting                 e1002353.
+the “Emerging Mathematical Frontiers in Molecular Evolution” meeting            [17] L. Zhang, N. Abhari, C. Colijn, Y. Wu, A fast and scalable method for inferring
+where the ideas for this paper were conceived. They also thank the                   phylogenetic networks from trees by aligning lineage taxon strings, Genome Res.
+reviewers and the Handling Editor for their comments.                                33 (7) (2023) 1053–1060.
+
+
+
+
+                                                                            7
+

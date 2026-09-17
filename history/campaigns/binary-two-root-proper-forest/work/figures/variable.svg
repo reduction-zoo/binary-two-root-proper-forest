@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="530" viewBox="0 0 620 530">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#222"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M230.0,260.0 L230.0,312.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M390.0,260.0 L390.0,312.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M310.0,445.0 L310.0,494.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M112.98168419371451,53.256818745205926 L83.42197896754259,109.09181750575289" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M127.01831580628549,53.256818745205926 L156.5780210324574,109.09181750575289" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M86.8608556142087,134.18259789487126 L215.76697326294956,233.9808825261545" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M66.46185031754538,137.3328828746567 L33.41525987298185,185.06684685013732" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M178.23529411764707,132.05882352941177 L374.11764705882354,236.52941176470588" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M173.53814968245462,137.3328828746567 L206.58474012701816,185.06684685013732" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M492.9816841937145,53.256818745205926 L463.4219789675426,109.09181750575289" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M507.0183158062855,53.256818745205926 L536.5780210324574,109.09181750575289" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M441.7647058823529,132.05882352941177 L245.88235294117646,236.52941176470588" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M446.4618503175454,137.3328828746567 L413.41525987298184,185.06684685013732" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M533.1391443857913,134.18259789487126 L404.23302673705047,233.9808825261545" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M553.5381496824547,137.3328828746567 L586.5847401270181,185.06684685013732" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M239.37042571331637,341.71303214164544 L298.7554891440204,415.9443614300254" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M218.35828999825603,339.458889376417 L154.6566840006976,391.2164442494332" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M380.62957428668363,341.71303214164544 L321.2445108559796,415.9443614300254" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M401.641710001744,339.458889376417 L465.34331599930243,391.2164442494332" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="120" cy="40" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<text x="120" y="46" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">0</text>
+<circle cx="500" cy="40" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<text x="500" y="46" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">1</text>
+<path d="M230,229 L246,245 L230,261 L214,245 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="230" y="251" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">P</text>
+<path d="M390,229 L406,245 L390,261 L374,245 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="390" y="251" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">Q</text>
+<circle cx="230" cy="330" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="390" cy="330" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<path d="M310,414 L326,430 L310,446 L294,430 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="310" y="436" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">U</text>
+<circle cx="310" cy="500" r="5" fill="#222"/>
+<circle cx="75" cy="125" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="165" cy="125" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="30" cy="190" r="5" fill="#222"/>
+<circle cx="210" cy="190" r="5" fill="#222"/>
+<circle cx="455" cy="125" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="545" cy="125" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="410" cy="190" r="5" fill="#222"/>
+<circle cx="590" cy="190" r="5" fill="#222"/>
+<circle cx="150" cy="395" r="5" fill="#222"/>
+<circle cx="470" cy="395" r="5" fill="#222"/>
+<text x="186" y="245" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">b</text>
+<text x="435" y="245" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">¬b</text>
+<text x="385" y="435" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="normal">either</text>
+</svg>
