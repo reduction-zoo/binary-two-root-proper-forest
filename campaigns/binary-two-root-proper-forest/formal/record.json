@@ -1,0 +1,7 @@
+{
+  "id": "Q003",
+  "source_definition": "The source gives a finite ground set and an explicit family of three-element subsets. A valid output assigns two colors so that every subset meets both colors, or reports NO-SOLUTION.",
+  "target_definition": "The target is a weakly connected binary acyclic network with exactly two roots. Find a spanning forest rooted at those roots, with the original leaves, such that every excluded edge joins different components, or report NO-SOLUTION. Roots have indegree/outdegree (0,2), internal vertices (1,2) or (2,1), and leaves (1,0).",
+  "required_result": "Construct deterministic polynomial-time maps F and G: F sends every legal source instance to a legal target instance, and G(x,y) is a valid source output for every valid output y of F(x). Preserve the stated threshold, domain and promises. The requested complexity conclusion is NP-hardness for the stated target problem.",
+  "equation": ""
+}
