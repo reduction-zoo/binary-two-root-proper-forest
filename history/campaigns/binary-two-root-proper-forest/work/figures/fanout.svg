@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="425" viewBox="0 0 460 425">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#222"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M75.0,65.0 L75.0,182.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M87.56415895257922,58.19401670820383 L174.92300925690495,115.1671799501554" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M190.0,140.0 L190.0,257.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M203.22219955043172,132.0833211877313 L314.13336053948194,191.50001457472246" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M67.2825636685871,212.86239388568816 L33.08697453256516,269.85504244572473" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M75.0,215.0 L75.0,332.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M204.98128508316768,275.7490642541584 L284.00748596673293,279.70037429833667" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M190.0,290.0 L190.0,332.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M337.9499841000477,212.7199745600763 L376.82000635998094,274.9120101759695" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M330.0,215.0 L330.0,332.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M75,7 L75,32" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<circle cx="75" cy="50" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="190" cy="125" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="330" cy="200" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="75" cy="200" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="190" cy="275" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="30" cy="275" r="5" fill="#222"/>
+<circle cx="290" cy="280" r="5" fill="#222"/>
+<circle cx="380" cy="280" r="5" fill="#222"/>
+<path d="M75,334 L91,350 L75,366 L59,350 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<path d="M190,334 L206,350 L190,366 L174,350 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<path d="M330,334 L346,350 L330,366 L314,350 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="40" y="50" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">s</text>
+<text x="130" y="125" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">s</text>
+<text x="360" y="200" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">s</text>
+<text x="43" y="200" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">s</text>
+<text x="155" y="275" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">s</text>
+<text x="190" y="400" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="normal">Other receiver parents omitted</text>
+</svg>

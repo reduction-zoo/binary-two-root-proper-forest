@@ -1,0 +1,9 @@
+{"progress": 128, "recoveries": 256}
+{"progress": 256, "recoveries": 512}
+{"progress": 384, "recoveries": 768}
+{"progress": 512, "recoveries": 1024}
+{"progress": 640, "recoveries": 1280}
+{"progress": 768, "recoveries": 1536}
+{"progress": 896, "recoveries": 1792}
+{"progress": 1024, "recoveries": 2046}
+{"result": "pass", "source_instances": 1088, "yes": 1080, "no": 8, "forest_recoveries": 2160, "max_vertices": 556, "seed": 20260916}

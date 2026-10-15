@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="470" viewBox="0 0 700 470">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#222"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M350.0,70.0 L350.0,102.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M365.0,55.0 L409.0,55.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M113.41640786499875,186.70820393249937 L203.90031056200152,231.95015528100075" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M86.34450283806093,186.20704416451775 L50.46219886477563,202.5171823341929" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M586.5835921350013,186.70820393249937 L496.0996894379985,231.95015528100075" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M613.655497161939,186.20704416451775 L649.5378011352244,202.5171823341929" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M114.04493766353566,325.26685162382586 L203.1460748037572,358.67977805140896" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M86.34450283806093,326.20704416451775 L50.46219886477563,342.5171823341929" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M585.9550623364644,325.26685162382586 L496.8539251962428,358.67977805140896" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M613.655497161939,326.20704416451775 L649.5378011352244,342.5171823341929" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M338.9779483305877,130.174201540996 L233.22646200329478,227.7909581508048" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M361.0220516694123,130.174201540996 L466.7735379967052,227.7909581508048" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M220.0,255.0 L220.0,347.0" fill="none" stroke="#222" stroke-width="3.4" marker-end="url(#arrow)"/>
+<path d="M480.0,255.0 L480.0,347.0" fill="none" stroke="#222" stroke-width="3.4" marker-end="url(#arrow)"/>
+<path d="M220.0,380.0 L220.0,439.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M480.0,380.0 L480.0,439.0" fill="none" stroke="#222" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M350,12 L350,37" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M100,137 L100,162" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M600,137 L600,162" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M100,277 L100,302" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M600,277 L600,302" stroke="#222" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<circle cx="350" cy="120" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<text x="350" y="126" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">A</text>
+<path d="M220,224 L236,240 L220,256 L204,240 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="220" y="246" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">B</text>
+<path d="M480,224 L496,240 L480,256 L464,240 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="480" y="246" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">C</text>
+<path d="M220,349 L236,365 L220,381 L204,365 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="220" y="371" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">D</text>
+<path d="M480,349 L496,365 L480,381 L464,365 Z" fill="#d8e5f1" stroke="#222" stroke-width="2"/>
+<text x="480" y="371" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">E</text>
+<circle cx="350" cy="55" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="100" cy="180" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="600" cy="180" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="100" cy="320" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="600" cy="320" r="14" fill="white" stroke="#222" stroke-width="2"/>
+<circle cx="415" cy="55" r="5" fill="#222"/>
+<circle cx="45" cy="205" r="5" fill="#222"/>
+<circle cx="655" cy="205" r="5" fill="#222"/>
+<circle cx="45" cy="345" r="5" fill="#222"/>
+<circle cx="655" cy="345" r="5" fill="#222"/>
+<circle cx="220" cy="445" r="5" fill="#222"/>
+<circle cx="480" cy="445" r="5" fill="#222"/>
+<text x="300" y="55" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">¬a</text>
+<text x="55" y="174" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">a</text>
+<text x="645" y="174" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">a</text>
+<text x="58" y="308" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">¬b</text>
+<text x="642" y="308" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">¬c</text>
+<text x="393" y="126" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">¬a</text>
+<text x="175" y="244" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">b</text>
+<text x="525" y="244" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">c</text>
+<text x="175" y="370" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">b</text>
+<text x="525" y="370" text-anchor="middle" font-family="Libertinus Serif,serif" font-size="19" font-style="italic">c</text>
+</svg>

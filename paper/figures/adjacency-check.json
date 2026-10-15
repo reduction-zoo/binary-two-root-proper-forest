@@ -1,0 +1,7 @@
+{
+  "clause_vertices": 17,
+  "clause_arcs": 16,
+  "clause_internal_degrees": "pass",
+  "three_port_fanout_degrees": "pass",
+  "boundary_stubs": "incoming fanout/rail arcs; receivers may have other omitted parents"
+}

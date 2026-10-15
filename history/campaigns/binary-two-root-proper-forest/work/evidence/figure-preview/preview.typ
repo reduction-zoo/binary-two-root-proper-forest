@@ -1,0 +1,6 @@
+#set page(width: 180mm, height: 160mm, margin: 12mm)
+#align(center, image("../../figures/clause.svg", width: 100%))
+#pagebreak()
+#align(center, image("../../figures/fanout.svg", width: 90%))
+#pagebreak()
+#align(center, image("../../figures/variable.svg", width: 100%))

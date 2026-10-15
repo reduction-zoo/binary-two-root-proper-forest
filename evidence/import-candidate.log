@@ -1,0 +1,3 @@
+Uninstalled 1 package in 3ms
+Installed 1 package in 2ms
+{"candidate": "pass", "source_cases": 9, "forest_recoveries": 21, "target_sizes": [[18, 19], [18, 19], [38, 42], [80, 91], [166, 192], [292, 339], [270, 313], [164, 189], [10, 10]]}

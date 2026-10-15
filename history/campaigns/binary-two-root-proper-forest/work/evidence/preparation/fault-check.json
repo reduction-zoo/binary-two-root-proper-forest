@@ -1,0 +1,18 @@
+[
+  {
+    "fixture": "wrong-decision",
+    "rejected": true,
+    "exit_code": 1
+  },
+  {
+    "fixture": "wrong-recovery",
+    "rejected": true,
+    "exit_code": 1
+  },
+  {
+    "malformed_serializations_mapped_to_legal_no": 3
+  },
+  {
+    "cyclic_recovery_input_rejected": true
+  }
+]

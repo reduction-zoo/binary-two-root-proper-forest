@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/xiweipan/Codes/reduction-research/campaigns/binary-two-root-proper-forest/work/check.py", line 106, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/xiweipan/Codes/reduction-research/campaigns/binary-two-root-proper-forest/work/check.py", line 97, in main
+    assert bool(solutions)==case['yes'],source
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'elements': [], 'triples': []}

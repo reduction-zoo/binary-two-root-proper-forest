@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "cases": [
+    {
+      "n": 0,
+      "m": 0,
+      "forests_checked": 4,
+      "all_forests": true,
+      "recovered_splits": 1,
+      "source_splits": 1
+    },
+    {
+      "n": 1,
+      "m": 0,
+      "forests_checked": 4,
+      "all_forests": true,
+      "recovered_splits": 2,
+      "source_splits": 2
+    },
+    {
+      "n": 2,
+      "m": 0,
+      "forests_checked": 16,
+      "all_forests": true,
+      "recovered_splits": 4,
+      "source_splits": 4
+    },
+    {
+      "n": 3,
+      "m": 1,
+      "forests_checked": 48,
+      "all_forests": true,
+      "recovered_splits": 6,
+      "source_splits": 6
+    },
+    {
+      "n": 7,
+      "m": 7,
+      "forests_checked": 0,
+      "all_forests": false,
+      "recovered_splits": 0,
+      "source_splits": 0
+    },
+    {
+      "n": 7,
+      "m": 6,
+      "forests_checked": 1,
+      "all_forests": false,
+      "recovered_splits": 1,
+      "source_splits": 10
+    },
+    {
+      "n": 8,
+      "m": 14,
+      "forests_checked": 0,
+      "all_forests": false,
+      "recovered_splits": 0,
+      "source_splits": 0
+    }
+  ],
+  "constant_no_checked_exhaustively": true
+}
